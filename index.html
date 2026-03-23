@@ -486,11 +486,44 @@
         gap: 16px;
       }
 
+      .closing-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .closing-main {
+        display: grid;
+        gap: 16px;
+      }
+
       .closing p {
         color: var(--muted);
         font-family: "Shema Serif", Georgia, serif;
         line-height: 1.75;
         max-width: 72ch;
+      }
+
+      .prayer-card {
+        padding: 20px;
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at top right, rgba(198, 178, 124, 0.2), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 241, 230, 0.92));
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        display: grid;
+        gap: 12px;
+      }
+
+      .prayer-card h3 {
+        font-size: 1.08rem;
+        color: var(--forest);
+        line-height: 1.2;
+      }
+
+      .prayer-card p {
+        max-width: none;
       }
 
       .signature {
@@ -537,6 +570,10 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .closing-layout {
+          grid-template-columns: 1fr;
+        }
+
         .hero-card {
           min-height: 340px;
         }
@@ -561,6 +598,7 @@
         }
 
         .metric-grid,
+        .closing-layout,
         .tech-grid {
           grid-template-columns: 1fr;
         }
@@ -981,21 +1019,43 @@
       </section>
 
       <section class="closing">
-        <div class="section-heading">
-          <h2>O que queremos que vocês sintam ao ler isso</h2>
+        <div class="closing-layout">
+          <div class="closing-main">
+            <div class="section-heading">
+              <h2>O que queremos que vocês sintam ao ler isso</h2>
+            </div>
+            <p>
+              Que a Zion Church não está apenas apoiando um ministério “lá longe”, mas
+              participando ativamente de algo vivo: pessoas sendo cuidadas, equipes
+              sendo fortalecidas e tecnologia sendo desenvolvida para servir a tradução
+              da Palavra de Deus com mais profundidade e mais alcance.
+            </p>
+            <p>
+              Obrigada por caminhar conosco com generosidade, oração e cobertura
+              pastoral. É muito precioso ter irmãos que não apenas enviam recursos, mas
+              realmente entram na história conosco. Esse cuidado alcança o trabalho,
+              as equipes que recebemos e também a nossa família.
+            </p>
+          </div>
+
+          <aside class="prayer-card">
+            <div class="eyebrow">Pedido de Oração</div>
+            <h3>Como vocês podem orar por nós</h3>
+            <p>
+              Orem pelo nosso processo de cidadania americana. Com essa etapa
+              concluída, teremos mais liberdade para viajar e oferecer treinamento
+              e acompanhamento às equipes de tradução diretamente nos países onde
+              os projetos estão acontecendo.
+            </p>
+            <p>
+              Orem também pela saúde da nossa família, especialmente para que a
+              Kanani tenha acesso a um bom plano de saúde e para que possamos
+              encontrar, aqui em Kansas City, um programa adequado para jovens com
+              necessidades especiais, no qual ela possa participar e florescer.
+            </p>
+          </aside>
         </div>
-        <p>
-          Que a Zion Church não está apenas apoiando um ministério “lá longe”, mas
-          participando ativamente de algo vivo: pessoas sendo cuidadas, equipes
-          sendo fortalecidas e tecnologia sendo desenvolvida para servir a tradução
-          da Palavra de Deus com mais profundidade e mais alcance.
-        </p>
-        <p>
-          Obrigada por caminhar conosco com generosidade, oração e cobertura
-          pastoral. É muito precioso ter irmãos que não apenas enviam recursos, mas
-          realmente entram na história conosco. Esse cuidado alcança o trabalho,
-          as equipes que recebemos e também a nossa família.
-        </p>
+
         <div class="signature">
           <div>
             <div class="signature-name">Com carinho e gratidão,</div>
