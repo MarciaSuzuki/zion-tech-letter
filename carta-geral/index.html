@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carta Geral • Atualização Interativa</title>
+    <style>
+      @font-face {
+        font-family: "Shema Sans";
+        src: url("./assets/Montserrat-VariableFont_wght.ttf") format("truetype");
+      }
+
+      @font-face {
+        font-family: "Shema Serif";
+        src: url("./assets/Merriweather-Regular.ttf") format("truetype");
+      }
+
+      :root {
+        --bg: #f6f1e6;
+        --paper: rgba(255, 252, 247, 0.9);
+        --paper-strong: rgba(255, 255, 255, 0.96);
+        --forest: #31412e;
+        --olive: #69754a;
+        --terracotta: #b25a2b;
+        --gold: #c6b27c;
+        --line: rgba(49, 65, 46, 0.12);
+        --text: #1d2218;
+        --muted: #5d6256;
+        --shadow: 0 24px 60px rgba(49, 65, 46, 0.14);
+        --radius: 26px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: "Shema Sans", "Avenir Next", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(178, 90, 43, 0.16), transparent 22%),
+          radial-gradient(circle at 80% 10%, rgba(105, 117, 74, 0.18), transparent 20%),
+          linear-gradient(180deg, #f8f4eb 0%, #efe7d7 55%, #e7deca 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(49, 65, 46, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(49, 65, 46, 0.035) 1px, transparent 1px);
+        background-size: 38px 38px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.25), transparent 80%);
+      }
+
+      .shell {
+        width: min(1180px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 28px 0 40px;
+        position: relative;
+      }
+
+      .hero,
+      .metrics,
+      .story,
+      .gallery,
+      .closing {
+        background: linear-gradient(180deg, var(--paper-strong), var(--paper));
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        gap: 24px;
+        padding: 28px;
+        overflow: hidden;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(178, 90, 43, 0.1);
+        color: var(--terracotta);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand img {
+        width: 110px;
+        height: auto;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 4.6vw, 4rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+        color: var(--forest);
+      }
+
+      .lead {
+        font-family: "Shema Serif", Georgia, serif;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 62ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button,
+      .mini-pill,
+      .tab {
+        appearance: none;
+        border: 0;
+        text-decoration: none;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .button {
+        padding: 13px 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .button:hover,
+      .tab:hover,
+      .mini-pill:hover {
+        transform: translateY(-1px);
+      }
+
+      .button.primary {
+        background: linear-gradient(135deg, var(--forest), #4d6642);
+        color: #fff;
+        box-shadow: 0 14px 28px rgba(49, 65, 46, 0.22);
+      }
+
+      .button.secondary {
+        background: rgba(105, 117, 74, 0.12);
+        color: var(--forest);
+        border: 1px solid rgba(49, 65, 46, 0.12);
+      }
+
+      .hero-card {
+        position: relative;
+        min-height: 420px;
+        border-radius: 22px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(15, 20, 14, 0.05), rgba(15, 20, 14, 0.45)),
+          url("./assets/marcia-teaching.jpeg") center 24% / cover no-repeat;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, transparent 20%, rgba(20, 24, 17, 0.72) 100%);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: auto 18px 18px;
+        z-index: 1;
+        display: grid;
+        gap: 10px;
+      }
+
+      .overlay-kicker {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .overlay-title {
+        color: #fff;
+        font-size: 1.42rem;
+        line-height: 1.05;
+        font-weight: 700;
+        max-width: 14ch;
+      }
+
+      .overlay-note {
+        color: rgba(255, 255, 255, 0.86);
+        font-family: "Shema Serif", Georgia, serif;
+        line-height: 1.55;
+      }
+
+      .metrics {
+        margin-top: 22px;
+        padding: 20px;
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(1.4rem, 2.8vw, 2rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        font-family: "Shema Serif", Georgia, serif;
+        line-height: 1.6;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .metric {
+        padding: 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        display: grid;
+        gap: 8px;
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--forest);
+        letter-spacing: -0.05em;
+        font-weight: 800;
+      }
+
+      .metric-label {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .story {
+        margin-top: 22px;
+        padding: 22px;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .tabs {
+        display: grid;
+        gap: 10px;
+        align-content: start;
+      }
+
+      .tab {
+        text-align: left;
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        color: var(--forest);
+      }
+
+      .tab strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .tab span {
+        display: block;
+        color: var(--muted);
+        line-height: 1.45;
+        font-size: 0.9rem;
+      }
+
+      .tab.active {
+        background: linear-gradient(160deg, rgba(105, 117, 74, 0.14), rgba(198, 178, 124, 0.18));
+        box-shadow: 0 14px 28px rgba(49, 65, 46, 0.08);
+      }
+
+      .panels {
+        position: relative;
+      }
+
+      .panel {
+        display: none;
+        gap: 18px;
+      }
+
+      .panel.active {
+        display: grid;
+      }
+
+      .panel-card {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at top right, rgba(178, 90, 43, 0.08), transparent 28%),
+          rgba(255, 255, 255, 0.74);
+        border: 1px solid rgba(49, 65, 46, 0.08);
+      }
+
+      .mini-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .mini-pill {
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(49, 65, 46, 0.08);
+        color: var(--forest);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .panel p {
+        color: var(--muted);
+        font-family: "Shema Serif", Georgia, serif;
+        line-height: 1.75;
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .tech-card {
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(247, 244, 237, 0.84);
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        display: grid;
+        gap: 10px;
+      }
+
+      .tech-card h3 {
+        font-size: 1.02rem;
+        color: var(--forest);
+      }
+
+      .tech-card p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .gallery {
+        margin-top: 22px;
+        padding: 22px;
+      }
+
+      .gallery-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        gap: 18px;
+      }
+
+      .figure-card {
+        position: relative;
+        min-height: 420px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #d8d0bf;
+      }
+
+      .figure-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .figure-caption {
+        position: absolute;
+        inset: auto 18px 18px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        max-width: 420px;
+        background: rgba(18, 24, 18, 0.7);
+        color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      .figure-caption strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      .figure-caption span {
+        line-height: 1.5;
+        font-size: 0.92rem;
+      }
+
+      .gallery-nav {
+        display: grid;
+        gap: 10px;
+        align-content: start;
+      }
+
+      .gallery-button {
+        padding: 14px 15px;
+        border-radius: 18px;
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        background: rgba(255, 255, 255, 0.72);
+        text-align: left;
+        cursor: pointer;
+        font: inherit;
+        color: var(--forest);
+      }
+
+      .gallery-button.active {
+        background: linear-gradient(160deg, rgba(49, 65, 46, 0.88), rgba(81, 104, 69, 0.88));
+        color: #fff;
+      }
+
+      .gallery-button strong,
+      .gallery-button span {
+        display: block;
+      }
+
+      .gallery-button strong {
+        margin-bottom: 4px;
+      }
+
+      .gallery-button span {
+        font-size: 0.86rem;
+        line-height: 1.45;
+        opacity: 0.82;
+      }
+
+      .closing {
+        margin-top: 22px;
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .closing-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .closing-main {
+        display: grid;
+        gap: 16px;
+      }
+
+      .closing p {
+        color: var(--muted);
+        font-family: "Shema Serif", Georgia, serif;
+        line-height: 1.75;
+        max-width: 72ch;
+      }
+
+      .prayer-card {
+        padding: 20px;
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at top right, rgba(198, 178, 124, 0.2), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 241, 230, 0.92));
+        border: 1px solid rgba(49, 65, 46, 0.08);
+        display: grid;
+        gap: 12px;
+      }
+
+      .prayer-card h3 {
+        font-size: 1.08rem;
+        color: var(--forest);
+        line-height: 1.2;
+      }
+
+      .prayer-card p {
+        max-width: none;
+      }
+
+      .signature {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(49, 65, 46, 0.08);
+      }
+
+      .signature-name {
+        font-size: 1rem;
+        color: var(--forest);
+        font-weight: 700;
+      }
+
+      .signature-note {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .foot {
+        margin-top: 16px;
+        text-align: center;
+        color: rgba(93, 98, 86, 0.82);
+        font-size: 0.84rem;
+      }
+
+      .print-url {
+        display: none;
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .story-grid,
+        .gallery-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-grid,
+        .tech-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .closing-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card {
+          min-height: 340px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(100vw - 18px, 100%);
+          padding-top: 10px;
+        }
+
+        .hero,
+        .metrics,
+        .story,
+        .gallery,
+        .closing {
+          border-radius: 22px;
+        }
+
+        .hero {
+          padding: 20px;
+        }
+
+        .metric-grid,
+        .closing-layout,
+        .tech-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .figure-card {
+          min-height: 330px;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        body::before {
+          display: none;
+        }
+
+        .shell {
+          width: auto;
+          margin: 0;
+          padding: 0;
+        }
+
+        .hero,
+        .metrics,
+        .story,
+        .gallery,
+        .closing {
+          box-shadow: none;
+          break-inside: avoid;
+          margin-top: 14px;
+        }
+
+        .button,
+        .tab,
+        .gallery-button {
+          box-shadow: none !important;
+        }
+
+        a {
+          color: inherit;
+        }
+
+        .print-url {
+          display: inline;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="brand">
+            <img src="./assets/logo-verde.svg" alt="Shema Bible Translation" />
+            <div class="eyebrow">Carta Digital • Aos irmãos</div>
+          </div>
+
+          <h1>Uma atualização viva do que vocês já estão sustentando</h1>
+
+          <p class="lead">
+            Queridos irmãos e parceiros, vocês já estão participando de algo muito bonito:
+            cuidado, intercessão, tradução da Bíblia e ferramentas novas
+            de AI que estão servindo equipes no Brasil, na Índia, no Timor Leste
+            e no Pacífico.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="https://shema-update.vercel.app/" target="_blank" rel="noopener noreferrer">
+              Abrir mapa global
+            </a>
+            <a class="button secondary" href="#historia">
+              Ver a história em blocos
+            </a>
+          </div>
+
+          <p class="lead">
+            Esta versão curta cobre principalmente <strong>janeiro e fevereiro de 2026</strong>,
+            com uma nota adicional sobre o trabalho presencial com tradutores em
+            <strong>março de 2026</strong>, aqui em Kansas City.
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-overlay">
+            <div class="overlay-kicker">Pessoas e tecnologia em missão</div>
+            <div class="overlay-title">Formação, tradução oral e AI em projetos reais</div>
+            <div class="overlay-note">
+              Pois a terra se encherá do conhecimento da glória do Senhor, como
+              as águas cobrem o mar. Habacuque 2:14
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <div class="section-heading">
+          <h2>Em números</h2>
+          <p>
+            Alguns marcos concretos que ajudam a enxergar o que Deus está
+            construindo por meio dessa parceria.
+          </p>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric">
+            <div class="metric-value" data-count="900">0</div>
+            <div class="metric-label">interações registradas nos grupos principais em janeiro e fevereiro</div>
+          </article>
+          <article class="metric">
+            <div class="metric-value" data-count="52">0</div>
+            <div class="metric-label">dias com atividade nesses grupos, entre cuidado, oração e coordenação</div>
+          </article>
+          <article class="metric">
+            <div class="metric-value" data-count="126">0</div>
+            <div class="metric-label">projetos mostrados no mapa interativo global do Shema Update</div>
+          </article>
+          <article class="metric">
+            <div class="metric-value" data-count="27">0</div>
+            <div class="metric-label">países representados na visualização interativa das equipes apoiadas</div>
+          </article>
+          <article class="metric">
+            <div class="metric-value" data-count="23">0</div>
+            <div class="metric-label">projetos orais acompanhados no conjunto global de dados</div>
+          </article>
+          <article class="metric">
+            <div class="metric-value" data-count="14">0</div>
+            <div class="metric-label">idiomas no Timor Leste aparecendo hoje na base global do mapa</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="story" id="historia">
+        <div class="section-heading">
+          <h2>O que isso significa, na prática</h2>
+          <p>
+            Clique nos blocos para navegar por esta atualização curta. A ideia é
+            que esta carta seja lida como uma pequena experiência, não como um
+            documento formal, com fotos reais do que vivemos nesses meses.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <div class="tabs" role="tablist" aria-label="Seções da carta">
+            <button class="tab active" data-panel="panel-jan">
+              <strong>Janeiro</strong>
+              <span>ritmo de equipe, oração, cuidado e alinhamento do ministério</span>
+            </button>
+            <button class="tab" data-panel="panel-feb">
+              <strong>Fevereiro</strong>
+              <span>avanço técnico, treinamento de 4 tradutores da Índia e novas conversas de parceria</span>
+            </button>
+            <button class="tab" data-panel="panel-mar">
+              <strong>Março</strong>
+              <span>trabalho presencial com tradutores de Kosrae e Terena</span>
+            </button>
+            <button class="tab" data-panel="panel-global">
+              <strong>Mapa Global</strong>
+              <span>uma visão visual do alcance das equipes que temos apoiado</span>
+            </button>
+          </div>
+
+          <div class="panels">
+            <div class="panel active" id="panel-jan">
+              <div class="panel-card">
+                <div class="mini-pills">
+                  <span class="mini-pill">900 interações</span>
+                  <span class="mini-pill">52 dias ativos</span>
+                  <span class="mini-pill">YWAM KC + SHEMA</span>
+                </div>
+                <p>
+                  Janeiro começou com muito movimento de equipe, oração e
+                  coordenação. Tivemos alinhamentos frequentes entre o
+                  <strong>OBT - YWAM KC</strong> e o <strong>SHEMA [OBT Lab]</strong>,
+                  com acompanhamento, intercessão e decisões práticas para
+                  sustentar o ministério com saúde e constância.
+                </p>
+                <p>
+                  Em vez de apenas “manter a máquina rodando”, esse tempo ajudou a
+                  fortalecer o ambiente espiritual e relacional em que toda a parte
+                  técnica acontece. Para nós, isso faz parte da missão tanto quanto
+                  a tecnologia em si.
+                </p>
+              </div>
+
+              <div class="tech-grid">
+                <article class="tech-card">
+                  <h3>Cuidado</h3>
+                  <p>Seguimos orando por saúde, decisões, viagens e necessidades pessoais da equipe.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Mentoria</h3>
+                  <p>Janeiro também envolveu conversas sobre formação e caminho de mentores no contexto OBT.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Base saudável</h3>
+                  <p>O que foi construído em janeiro preparou o solo para o avanço técnico dos meses seguintes.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel" id="panel-feb">
+              <div class="panel-card">
+                <div class="mini-pills">
+                  <span class="mini-pill">Bible Mining Maps</span>
+                  <span class="mini-pill">4 tradutores da Índia</span>
+                  <span class="mini-pill">Acoustemes</span>
+                  <span class="mini-pill">FCBH • 25 fev 2026</span>
+                </div>
+                <p>
+                  Em fevereiro vimos avanços importantes na parte tecnológica do
+                  ministério. O protótipo do <strong>Bible Mining Maps</strong> já
+                  trabalha com o livro de Rute estruturado em
+                  <strong>4 capítulos, 85 versículos, 463 cláusulas e 460 menções</strong>,
+                  ajudando a analisar o significado do texto bíblico antes da
+                  tradução.
+                </p>
+                <p>
+                  No dia <strong>25 de fevereiro de 2026</strong>, também abrimos uma
+                  conversa promissora com a equipe de AI da
+                  <strong>FCBH</strong> ao apresentar nossa pesquisa sobre
+                  <strong>Acoustemes</strong>, buscando colaboração futura para servir
+                  projetos de tradução oral com ainda mais qualidade e velocidade.
+                </p>
+                <p>
+                  Fevereiro também incluiu um tempo muito especial de formação
+                  presencial com uma <strong>equipe de 4 tradutores da Índia</strong>.
+                  Foi uma oportunidade rica de treinamento, troca de experiência e
+                  encorajamento mútuo, conectando tecnologia, missão e relacionamento.
+                </p>
+              </div>
+
+              <div class="tech-grid">
+                <article class="tech-card">
+                  <h3>Mais profundidade</h3>
+                  <p>O foco não é só acelerar, mas entender o texto com mais clareza antes de traduzir.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Índia</h3>
+                  <p>Em fevereiro também treinamos uma equipe de 4 tradutores da Índia, unindo formação prática e visão missionária.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Mais conexão</h3>
+                  <p>Fevereiro fortaleceu pontes entre missão, pesquisa, desenvolvimento aplicado e treinamento presencial.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel" id="panel-mar">
+              <div class="panel-card">
+                <div class="mini-pills">
+                  <span class="mini-pill">Kosrae</span>
+                  <span class="mini-pill">Terena</span>
+                  <span class="mini-pill">Kansas City</span>
+                </div>
+                <p>
+                  Neste mês de <strong>março de 2026</strong>, trabalhamos
+                  diretamente aqui em <strong>Kansas City</strong> com tradutores das
+                  línguas <strong>Kosrae</strong> e <strong>Terena</strong>, enquanto
+                  seguimos finalizando a coleta de dados linguísticos para treinar
+                  modelos de AI que poderão acelerar muito a tradução oral.
+                </p>
+                <p>
+                  No caso de <strong>Kosrae</strong>, os registros que acompanhamos já
+                  indicam porções importantes concluídas, incluindo
+                  <strong>Lucas, Rute e Atos 1-8</strong>. Em paralelo, o trabalho com
+                  <strong>Terena</strong> nos lembra que essa tecnologia também está a
+                  serviço de línguas indígenas do Brasil, com respeito ao contexto e
+                  à realidade local de cada povo.
+                </p>
+              </div>
+
+              <div class="tech-grid">
+                <article class="tech-card">
+                  <h3>Pacífico</h3>
+                  <p>Kosrae conecta esse esforço a uma ilha do Pacífico que já tem porções concluídas e quer avançar mais.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Brasil</h3>
+                  <p>Terena traz esse mesmo investimento para dentro do contexto de uma língua indígena brasileira.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Presencial</h3>
+                  <p>Esse mês não foi só pesquisa: foi relacionamento direto com tradutores, aqui, face a face.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel" id="panel-global">
+              <div class="panel-card">
+                <div class="mini-pills">
+                  <a class="mini-pill" href="https://shema-update.vercel.app/" target="_blank" rel="noopener noreferrer">Abrir Shema Update</a>
+                  <span class="mini-pill">126 projetos</span>
+                  <span class="mini-pill">27 países</span>
+                </div>
+                <p>
+                  O <strong>Shema Update</strong> é um mapa interativo feito por nós
+                  para mostrar, de forma bonita e acessível, o progresso das equipes
+                  que temos apoiado globalmente. Ali é possível explorar
+                  <strong>localidades, línguas e número de capítulos traduzidos</strong>,
+                  além de ter uma visão mais clara do alcance atual do ministério.
+                </p>
+                <p>
+                  Nos dados publicados em <strong>15 de março de 2026</strong>, o mapa
+                  mostra <strong>126 projetos em 27 países</strong>, ligados a
+                  <strong>20 organizações</strong>, incluindo
+                  <strong>50 projetos marcados como ativos</strong> e
+                  <strong>23 projetos orais</strong>. Só no Timor Leste, a base lista
+                  <strong>14 idiomas</strong> ligados a equipes acompanhadas.
+                </p>
+              </div>
+
+              <div class="tech-grid">
+                <article class="tech-card">
+                  <h3>Visual</h3>
+                  <p>Vocês podem literalmente ver o alcance global do que estão sustentando.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Interativo</h3>
+                  <p>Não é só uma lista: é uma forma viva de explorar países, idiomas, equipes e progresso.</p>
+                </article>
+                <article class="tech-card">
+                  <h3>Concreto</h3>
+                  <p>Os dados ajudam a transformar uma visão missionária ampla em algo palpável e mensurável.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery">
+        <div class="section-heading">
+          <h2>Uma janela visual para essa história</h2>
+          <p>
+            Esta galeria reúne algumas fotos reais desses meses. Os botões ao
+            lado trocam a cena principal para mostrar pessoas, tecnologia e
+            momentos que marcaram essa etapa.
+          </p>
+        </div>
+
+        <div class="gallery-layout">
+          <figure class="figure-card">
+            <img id="gallery-image" src="./assets/global-training.jpeg" alt="Equipe multicultural reunida em Kansas City" />
+            <figcaption class="figure-caption">
+              <strong id="gallery-title">Treinamento multicultural em Kansas City</strong>
+              <span id="gallery-copy">
+                Uma foto que resume bem este tempo: relacionamento, formação e
+                várias línguas sendo servidas ao mesmo tempo.
+              </span>
+            </figcaption>
+          </figure>
+
+          <div class="gallery-nav">
+            <button
+              class="gallery-button active"
+              data-image="./assets/global-training.jpeg"
+              data-title="Treinamento multicultural em Kansas City"
+              data-copy="Uma foto que resume bem este tempo: relacionamento, formação e várias línguas sendo servidas ao mesmo tempo."
+              data-alt="Equipe multicultural reunida em Kansas City"
+            >
+              <strong>Treinamento</strong>
+              <span>Uma visão mais pessoal das equipes e tradutores que recebemos.</span>
+            </button>
+            <button
+              class="gallery-button"
+              data-image="./assets/hindi-team.jpeg"
+              data-title="Índia • fevereiro"
+              data-copy="Em fevereiro treinamos uma equipe de 4 tradutores da Índia, em um tempo muito rico de aprendizado, troca e encorajamento."
+              data-alt="Equipe ligada ao treinamento de tradutores da Índia"
+            >
+              <strong>Índia</strong>
+              <span>Um dos momentos mais especiais de fevereiro foi esse treinamento presencial.</span>
+            </button>
+            <button
+              class="gallery-button"
+              data-image="./assets/timor-team.jpeg"
+              data-title="Timor Leste"
+              data-copy="Equipes do Timor Leste já estão usando os fluxos e ferramentas que estamos desenvolvendo para apoiar a tradução."
+              data-alt="Equipe do Timor Leste"
+            >
+              <strong>Timor Leste</strong>
+              <span>Uma das frentes onde já vemos uso concreto das novas ferramentas.</span>
+            </button>
+            <button
+              class="gallery-button"
+              data-image="./assets/terena-speaker.jpeg"
+              data-title="Tradução oral em contexto real"
+              data-copy="Essa cena nos lembra que tradução oral não é uma ideia abstrata: ela acontece com vozes, histórias e comunidades reais."
+              data-alt="Tradutor falando ao microfone em um contexto de tradução oral"
+            >
+              <strong>Tradução oral</strong>
+              <span>Uma janela para o tipo de contexto que queremos servir com mais qualidade.</span>
+            </button>
+            <button
+              class="gallery-button"
+              data-image="./assets/translation-tech.jpeg"
+              data-title="Tecnologia aplicada"
+              data-copy="Além das relações e do treinamento, seguimos avançando em ferramentas e coleta de dados para modelos de AI voltados à tradução oral."
+              data-alt="Computador com software de análise aberto durante trabalho de tradução"
+            >
+              <strong>Tecnologia</strong>
+              <span>AI, coleta de dados e ferramentas concretas a serviço dos tradutores.</span>
+            </button>
+            <button
+              class="gallery-button"
+              data-image="./assets/suzuki-family.jpeg"
+              data-title="Nossa família"
+              data-copy="Também quisemos incluir uma foto da nossa família, porque o cuidado de vocês alcança não só o trabalho, mas a nossa vida de perto."
+              data-alt="Foto da família Suzuki em frente a uma árvore de Natal"
+            >
+              <strong>Família</strong>
+              <span>O cuidado e as orações de vocês também sustentam a nossa casa.</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <div class="closing-layout">
+          <div class="closing-main">
+            <div class="section-heading">
+              <h2>O que queremos que vocês sintam ao ler isso</h2>
+            </div>
+            <p>
+              Que vocês não estão apenas apoiando um ministério “lá longe”, mas
+              participando ativamente de algo vivo: pessoas sendo cuidadas, equipes
+              sendo fortalecidas e tecnologia sendo desenvolvida para servir a tradução
+              da Palavra de Deus com mais profundidade e mais alcance.
+            </p>
+            <p>
+              Obrigada por caminharem conosco com generosidade, oração e cuidado fiel.
+              É muito precioso ter irmãos que não apenas enviam recursos, mas
+              realmente entram na história conosco. Esse cuidado alcança o trabalho,
+              as equipes que recebemos e também a nossa família.
+            </p>
+          </div>
+
+          <aside class="prayer-card">
+            <div class="eyebrow">Pedido de Oração</div>
+            <h3>Como vocês podem orar por nós</h3>
+            <p>
+              Orem pelo nosso processo de cidadania americana. Com essa etapa
+              concluída, teremos mais liberdade para viajar e oferecer treinamento
+              e acompanhamento às equipes de tradução diretamente nos países onde
+              os projetos estão acontecendo.
+            </p>
+            <p>
+              Orem também pela saúde da nossa família, especialmente para que a
+              Kanani tenha acesso a um bom plano de saúde e para que possamos
+              encontrar, aqui em Kansas City, um programa adequado para jovens com
+              necessidades especiais, no qual ela possa participar e florescer.
+            </p>
+          </aside>
+        </div>
+
+        <div class="signature">
+          <div>
+            <div class="signature-name">Com carinho e gratidão,</div>
+            <div class="signature-note">Suzuki e Marcia</div>
+            <div class="signature-note">Shema Bible Translation • YWAM Kansas City</div>
+          </div>
+          <div class="signature-note">
+            Carta geral aos irmãos e mantenedores • janeiro, fevereiro e março de 2026
+            <span class="print-url">• https://shema-update.vercel.app/</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="foot">
+        Carta digital preparada para leitura em tela e exportação em PDF.
+      </div>
+    </main>
+
+    <script>
+      const counterElements = document.querySelectorAll("[data-count]");
+      const formatCount = (value) => Number(value || "0").toLocaleString("pt-BR");
+      const shouldAnimateCounts = !navigator.userAgent.includes("HeadlessChrome");
+
+      const animateCounter = (element) => {
+        const target = Number(element.dataset.count || "0");
+        const duration = 1200;
+        const start = performance.now();
+
+        const frame = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = Math.round(target * eased).toLocaleString("pt-BR");
+          if (progress < 1) {
+            requestAnimationFrame(frame);
+          }
+        };
+
+        requestAnimationFrame(frame);
+      };
+
+      counterElements.forEach((element) => {
+        element.textContent = formatCount(element.dataset.count);
+      });
+
+      if (shouldAnimateCounts) {
+        const metricObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+
+        counterElements.forEach((element) => {
+          element.textContent = "0";
+          metricObserver.observe(element);
+        });
+      }
+
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".panel");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.panel;
+          tabs.forEach((item) => item.classList.toggle("active", item === tab));
+          panels.forEach((panel) => panel.classList.toggle("active", panel.id === target));
+        });
+      });
+
+      const galleryButtons = document.querySelectorAll(".gallery-button");
+      const galleryImage = document.getElementById("gallery-image");
+      const galleryTitle = document.getElementById("gallery-title");
+      const galleryCopy = document.getElementById("gallery-copy");
+
+      galleryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          galleryButtons.forEach((item) => item.classList.toggle("active", item === button));
+          galleryImage.src = button.dataset.image;
+          galleryImage.alt = button.dataset.alt || button.dataset.title;
+          galleryTitle.textContent = button.dataset.title;
+          galleryCopy.textContent = button.dataset.copy;
+        });
+      });
+    </script>
+  </body>
+</html>
